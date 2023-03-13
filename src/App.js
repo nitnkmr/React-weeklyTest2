@@ -2,6 +2,12 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProjectList from './components/ProjectList';
+import { Route, Routes } from 'react-router-dom';
+import About from './components/About';
+import Project from './components/Project';
+import Contact from './components/Contact';
+import Services from './components/Services';
+
 
 function App() {
   const list=[
@@ -22,21 +28,24 @@ function App() {
   return (
     <div className="App">
       <Navbar></Navbar>
-      <h1 className='mainheader'>Our Projects</h1>
-      <div className="container">
-          <ProjectList img={list[0].img} name={list[0].name}/>    
-          <ProjectList img={list[1].img} name={list[1].name}/>    
-          <ProjectList img={list[2].img} name={list[2].name}/>    
-          <ProjectList img={list[3].img} name={list[3].name}/>    
-          <ProjectList img={list[4].img} name={list[4].name}/>    
-          <ProjectList img={list[5].img} name={list[5].name}/>    
-          <ProjectList img={list[6].img} name={list[6].name}/>    
-          <ProjectList img={list[7].img} name={list[7].name}/>    
-          <ProjectList img={list[8].img} name={list[8].name}/>    
-          <ProjectList img={list[9].img} name={list[9].name}/>    
-          <ProjectList img={list[10].img} name={list[10].name}/>    
-          <ProjectList img={list[11].img} name={list[11].name}/>    
-      </div>
+      <Routes>
+        <Route path='/' element={<>
+          <h1 className='mainheader'>Our Projects</h1>
+          <div className="container">
+              {
+                list.map((e)=><ProjectList
+                   img={e.img} name={e.name}/>
+                )
+              }
+          </div>
+          </>
+        }/>
+        <Route path='/About' element={<About/>}/>
+        <Route path='/Project' element={<Project/>}/>
+        <Route path='/Services' element={<Services/>}/>
+        <Route path='/Contact' element={<Contact/>}/>
+      </Routes>
+      
       <Footer/>
     </div>
   );
